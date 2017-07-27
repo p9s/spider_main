@@ -13,7 +13,7 @@ cursor = conn.cursor()
 
 print 'connecting successful...'
 
-cursor.execute('SELECT * FROM py_shoes_comment_raw_data')
+cursor.execute('SELECT * FROM py_shoes_comment_raw_data WHERE good_type = "JY"')
 results = cursor.fetchall()
 comment_list = []
 for i in results:
@@ -163,7 +163,7 @@ def get_main_word():
     # conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='db_data2force', charset='utf8')
     # cursor = conn.cursor()
 
-    cursor.execute('SELECT * FROM py_keyword_word_count')
+    cursor.execute('SELECT * FROM py_keyword_word_count WHERE good_type = "JY"')
     results = cursor.fetchall()
     print result[2]
     print 'getting main table...'

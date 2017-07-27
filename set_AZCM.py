@@ -11,10 +11,10 @@ print 'connecting successful...'
 # except:
 #     print 'table exists'
 
-cursor.execute('SELECT * FROM py_shoes_comment_raw_data')#从数据库中提取全部数据
+cursor.execute('SELECT * FROM py_shoes_comment_raw_data WHERE good_type = "JY"')#从数据库中提取全部数据
 pro_info = cursor.fetchall()
 
-cursor.execute('SELECT * FROM py_keyword_main_tmp')#从数据库中提取全部数据
+cursor.execute('SELECT * FROM py_keyword_main_tmp WHERE good_type = "JY" ')#从数据库中提取全部数据
 key_words = cursor.fetchall()
 
 
@@ -27,9 +27,9 @@ for i in key_words:
 
 result = []
 for key in key_list:
-   pro_index = key[2]
+   pro_index = key_list.index(key)
    #print pro_index
-   pro_line = pro_info[pro_index-1]
+   pro_line = pro_info[pro_index]
    key.append(pro_line[6])
    result.append(key)
 
