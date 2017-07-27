@@ -1,4 +1,4 @@
-keyword = ["1","2"]
+keyword = ["tmp_"]
 dir_name = "result"
-keyword_db = ["1","2"]
+keyword_db = ["tmp_"]
 good_type = "JY"

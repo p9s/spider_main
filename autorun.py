@@ -21,7 +21,7 @@ while True:
     fh.write('keyword = ["'+content+'"]')
     fh.write('\n')
     fh.write('dir_name = "'+dir_name+'"'+'\n')
-    fh.write('keyword_db = ["1","2"]'+'\n')
+    fh.write('keyword_db = ["tmp_"]'+'\n')
     fh.write('good_type = "JY"')
     fh.close()
     #更新配置文件内容
