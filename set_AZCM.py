@@ -11,11 +11,13 @@ print 'connecting successful...'
 # except:
 #     print 'table exists'
 
-cursor.execute('SELECT * FROM py_shoes_comment_raw_data WHERE good_type = "JY"')#从数据库中提取全部数据
+cursor.execute('SELECT * FROM py_product_comments WHERE good_type = "JY"')#从数据库中提取全部数据
 pro_info = cursor.fetchall()
+print len(pro_info)
 
-cursor.execute('SELECT * FROM py_keyword_main_tmp WHERE good_type = "JY" ')#从数据库中提取全部数据
+cursor.execute('SELECT * FROM py_keyword_main_tmp WHERE good_type = "JY"')#从数据库中提取全部数据
 key_words = cursor.fetchall()
+print len(key_words)
 
 
 key_list = []
@@ -27,11 +29,14 @@ for i in key_words:
 
 result = []
 for key in key_list:
-   pro_index = key_list.index(key)
-   #print pro_index
-   pro_line = pro_info[pro_index]
-   key.append(pro_line[6])
-   result.append(key)
+    pro_index = key[2]
+   
+    for i in pro_info:
+        if int(i[0]) == int(pro_index):
+            key.append(i[6])
+            
+            break
+    result.append(key)
 
 print 'writing into database...'
 

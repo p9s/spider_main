@@ -13,7 +13,7 @@ cursor = conn.cursor()
 
 print 'connecting successful...'
 
-cursor.execute('SELECT * FROM py_shoes_comment_raw_data WHERE good_type = "JY"')
+cursor.execute('SELECT * FROM py_product_comments WHERE good_type = "JY"')
 results = cursor.fetchall()
 comment_list = []
 for i in results:
