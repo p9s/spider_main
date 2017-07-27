@@ -13,7 +13,7 @@ cursor = conn.cursor()
 
 print 'connecting successful...'
 
-cursor.execute('SELECT * FROM comment_from_baleaf')
+cursor.execute('SELECT * FROM py_shoes_comment_raw_data')
 results = cursor.fetchall()
 comment_list = []
 for i in results:

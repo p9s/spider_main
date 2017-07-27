@@ -11,7 +11,7 @@ print 'connecting successful...'
 # except:
 #     print 'table exists'
 
-cursor.execute('SELECT * FROM comment_from_baleaf')#从数据库中提取全部数据
+cursor.execute('SELECT * FROM py_shoes_comment_raw_data')#从数据库中提取全部数据
 pro_info = cursor.fetchall()
 
 cursor.execute('SELECT * FROM py_keyword_main_tmp')#从数据库中提取全部数据

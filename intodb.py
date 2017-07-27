@@ -15,7 +15,7 @@ conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', pa
 cursor = conn.cursor()
 
 try:
-    sql = """CREATE TABLE comment_from_baleaf_JP(id INT(11)primary key auto_increment ,prod_asin VARCHAR(200),title TEXT(10000),content TEXT(10000),user_name VARCHAR(200),color TEXT(1000),type_call VARCHAR(200),user_address TEXT(1000),vote INT(11),prod_star VARCHAR(200),create_date VARCHAR(200))"""
+    sql = """CREATE TABLE py_shoes_comment_raw_data(id INT(11)primary key auto_increment ,prod_asin VARCHAR(200),title TEXT(10000),content TEXT(10000),user_name VARCHAR(200),color TEXT(1000),type_call VARCHAR(200),user_address TEXT(1000),vote INT(11),prod_star VARCHAR(200),create_date VARCHAR(200))"""
     cursor.execute(sql)
 
 except:
