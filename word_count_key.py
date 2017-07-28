@@ -9,13 +9,13 @@ cursor = conn.cursor()
 
 print 'connecting successful...'
 
-cursor.execute('SELECT * FROM py_keyword_main WHERE good_type = "JY"')#从数据库中提取全部数据
+cursor.execute('SELECT * FROM py_keyword_main WHERE good_type = "'+config.good_type+'"')#从数据库中提取全部数据
 key_words = cursor.fetchall()
 
 # cursor.execute('SELECT * FROM py_shoes_comment_raw_data')
 # raw_data = cursor.fetchall()
 
-cursor.execute('SELECT * FROM py_keyword_word_count WHERE good_type = "JY"')
+cursor.execute('SELECT * FROM py_keyword_word_count WHERE good_type = "'+config.good_type+'"')
 key_count = cursor.fetchall()
 
 def get_pos_count(data_tuple):

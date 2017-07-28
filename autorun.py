@@ -22,7 +22,8 @@ while True:
     fh.write('\n')
     fh.write('dir_name = "'+dir_name+'"'+'\n')
     fh.write('keyword_db = ["tmp_"]'+'\n')
-    fh.write('good_type = "JY"')
+    fh.write('good_type = "'+config.good_type+'"\n')
+    fh.write('pro_website = "'+config.pro_website+'"')
     fh.close()
     #更新配置文件内容
 

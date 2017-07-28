@@ -42,9 +42,11 @@ def write_into_database(comment_list,cursor,conn):
             continue
         else:
             line.append(config.good_type)
+            line.append(config.pro_website)
+            line.append(line[0])
             #try:
      
-            cursor.execute('INSERT INTO py_product_comments(prod_asin,title,content,user_name,color,type_call,user_address,vote,prod_star,create_date,good_type)  values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',line) 
+            cursor.execute('INSERT INTO py_product_comments(prod_asin,title,content,user_name,color,type_call,user_address,vote,prod_star,create_date,good_type,prod_website,prod_group_number)  values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',line) 
             #cursor.execute('INSERT INTO fashion_shoe_comment_tmp (prod_asin,title,content,user_name,color,type_call,user_address,vote,prod_star,create_date)  values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',line)
             #写入数据库
             count = count + 1           

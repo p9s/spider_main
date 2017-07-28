@@ -1,5 +1,6 @@
 #coding=utf-8
 import MySQLdb as mydatabase
+import config
 
 conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
 cursor = conn.cursor()
@@ -11,11 +12,11 @@ print 'connecting successful...'
 # except:
 #     print 'table exists'
 
-cursor.execute('SELECT * FROM py_product_comments WHERE good_type = "JY"')#从数据库中提取全部数据
+cursor.execute('SELECT * FROM py_product_comments WHERE good_type = "'+config.good_type+'"')#从数据库中提取全部数据
 pro_info = cursor.fetchall()
 print len(pro_info)
 
-cursor.execute('SELECT * FROM py_keyword_main_tmp WHERE good_type = "JY"')#从数据库中提取全部数据
+cursor.execute('SELECT * FROM py_keyword_main_tmp WHERE good_type = "'+config.good_type+'"')#从数据库中提取全部数据
 key_words = cursor.fetchall()
 print len(key_words)
 
