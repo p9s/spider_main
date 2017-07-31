@@ -221,10 +221,14 @@ def get_page_range(asid):
 
     else:
         print 'connect successful'
+        page_content = page_content.find(class_="a-pagination")
         page_range = page_content.find_all(class_="page-button")#通过按钮上的数字查找到整个评论究竟有多少页 
         try:
             page_range = page_range[-1]
-            page_range = int(page_range.get_text())
+            page_range = str(page_range.get_text())
+            page_range = filter(str.isdigit,page_range)
+
+            print page_range
         except:
             page_range = []
     return page_range
