@@ -1,4 +1,5 @@
 import MySQLdb as mydatabase
+from multiprocessing import Pool
 
 conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
 cursor = conn.cursor()
@@ -17,15 +18,13 @@ for i in new:
 
 nw = list(set(new))
 
-def reset_list(new,old):
-    write_in = []
-    for line in new:
-        if line in old:
-            continue
-        else:
-            write_in.append(line)
+def reset_list(line):
+    if line in rst:
+        return 0
+    else:
+        return line
 
-    return write_in
+    
 
 def count_increase(write_in):
     index_dict = {}
@@ -66,8 +65,10 @@ def write_increase(index_dict):
             continue
     conn.commit()
 
-
-write_in = reset_list(nw,rst)
+pool = Pool()
+print 'reseting'
+write_in = pool,map(reset_list,nw)
+#write_in = reset_list(nw,rst)
 print 'reset finished'
 index_dict = count_increase(write_in)
 print 'writing into database'
