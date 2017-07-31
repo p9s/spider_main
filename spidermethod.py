@@ -230,7 +230,7 @@ def get_page_range(asid):
 
             print page_range
         except:
-            page_range = []
+            page_range = 1
     return page_range
 #获取页面链接
 
