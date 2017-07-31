@@ -3,13 +3,13 @@ import MySQLdb as mydatabase
 conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
 cursor = conn.cursor()
 
-cursor.execute('SELECT * FROM product_comments')
+cursor.execute('SELECT * FROM py_product_comments')
 result = cursor.fetchall()
 rst = []
 for i in result:
     rst.append(i[1:])
 
-cursor.execute('SELECT * FROM product_comments_tmp')
+cursor.execute('SELECT * FROM py_product_comments_tmp')
 new = cursor.fetchall()
 nw = []
 for i in new:
@@ -17,7 +17,7 @@ for i in new:
 
 nw = list(set(new))
 
-def rest_list(new,old):
+def reset_list(new,old):
     write_in = []
     for line in new:
         if line in old:
@@ -38,7 +38,7 @@ def count_increase(write_in):
     return index_dict
 
 
-def write_in(write_in):
+def write_in_database(write_in):
     print 'committing'
     for line in write_in:
         try:
@@ -56,7 +56,9 @@ def write_increase(index_dict):
     for key in index_dict:
         try:
             sql_1 = "UPDATE py_productDynamic SET pro_commentincrement = "+index_dict[key]+" WHERE pro_asin = '"+str(key)+"'"
+            #print str(key),index_dict[key]
             sql_2 = "UPDATE py_productDynamic SET pro_salesvolume = "+(((index_dict[key])**2)/(random.randint(0,index_dict[key]/2)))+" WHERE pro_asin = '"+str(key)+"'"
+            
             cursor.execute(sql_1)
             cursor.execute(sql_2)
         except Exception,e:
@@ -65,10 +67,9 @@ def write_increase(index_dict):
     conn.commit()
 
 
-
-
-
-
 write_in = reset_list(nw,rst)
+print 'reset finished'
 index_dict = count_increase(write_in)
-write_in(write_in)
+print 'writing into database'
+write_increase(index_dict)
+#write_in_database(write_in)
