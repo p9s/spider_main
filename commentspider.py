@@ -28,6 +28,7 @@ def run_spider(filename):
     count_down = 0
     tmp_list = asinlist 
     #在这里写一个缓存的列表
+    
     for asid in asinlist:
         try:
             asin_comment = spidermethod.spider_page_logic(asid)
