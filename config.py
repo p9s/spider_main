@@ -1,5 +1,5 @@
-keyword = ["tmp_"]
+keyword = [""]
 dir_name = "result"
-keyword_db = ["tmp_"]
+keyword_db = [""]
 good_type = "TEST"
 pro_website = "AZCM"
