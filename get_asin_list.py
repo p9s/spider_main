@@ -19,7 +19,7 @@ for i in asid_list:
     except:
         continue
 
-fh = open('tmp_asid_list.txt','w')
+fh = open('asid_list.txt','w')
 for i in result:
     fh.write(str(i.strip()))
     fh.write('\n')
