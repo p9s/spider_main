@@ -262,6 +262,8 @@ def spider_page_logic(asid):
     
     pool = ThreadPool(10)
     results = pool.map(get_item_attribute, page_url)
+    pool.join()
+    pool.close()
     asin_comment = []
     for i in results:
         if i == []:
