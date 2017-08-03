@@ -41,8 +41,7 @@ def run_spider(filename):
             #更新原始目录的asid表格
             time.sleep(random.uniform(1,3))
         except Exception,e:
-            print e 
-            break
+            print e
             count_down = count_down + 1
             #这是一个计算次数的设备，通过计数统计成功写入了多少条信息
             spidermethod.refresh(asinlist,count_down,filename)

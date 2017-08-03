@@ -295,6 +295,7 @@ def write_result_by_asid(asid,address,filename,asin_comment):
             
         json_content = json.dumps(rows)
         fh.write(json_content)
+        count+=1
         fh.write('\n')
 
     print '抓取完'+str(asid.strip())+'抓取到'+str(count)+'条,开始抓取下一件商品'
