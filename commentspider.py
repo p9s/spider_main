@@ -40,18 +40,20 @@ def run_spider(filename):
             spidermethod.refresh(asinlist,count_down,filename)
             #更新原始目录的asid表格
             time.sleep(random.uniform(1,3))
-        except:
+        except Exception,e:
+            print e 
+            break
             count_down = count_down + 1
             #这是一个计算次数的设备，通过计数统计成功写入了多少条信息
             spidermethod.refresh(asinlist,count_down,filename)
             continue
     #更新asid列表
-    rst.close()
+    
     count = 0
     fh.close()
-    rst=open(str(filename)+'asid_list.txt','w')
-    rst.write('')
-    rst.close()
+    # rst=open(str(filename)+'asid_list.txt','w')
+    # rst.write('')
+    # rst.close()
     print '总共抓取到'+str(comment_count)+'条'
 
 def main():

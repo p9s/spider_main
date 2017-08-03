@@ -9,6 +9,8 @@ import os
 import config
 from multiprocessing import Pool
 from multiprocessing.dummy import Pool as ThreadPool 
+import csv
+import json
 
 
 def get_htmlsoup(site):
@@ -166,31 +168,32 @@ def get_vote(html):
 def get_comment_data(html):
     comment = []
     comment.append(get_title(html))
-    comment.append('\t')
+    
     comment.append(get_content(html))
-    comment.append('\t')
+    
     comment.append(get_author(html))
-    comment.append('\t')
+   
     try:
         comment.append(get_item_type(html))
     except:
         comment.append('N/A')
-    comment.append('\t')
+  
     try:   
         comment.append(get_item_number(html))
     except:
         comment.append('N/A')
-    comment.append('\t')
+   
     comment.append(get_userid(html))
-    comment.append('\t')
+
     try:
         comment.append(get_vote(html))
     except:
         comment.append(str(0))
-    comment.append('\t')
+ 
     comment.append(get_stars(html))
-    comment.append('\t')
+   
     comment.append(get_comment_date(html))
+    
     return comment
 #连接成一整条完整的评论列表 
 def refresh(count_list,list_array,filename):
@@ -262,8 +265,9 @@ def spider_page_logic(asid):
     
     pool = ThreadPool(10)
     results = pool.map(get_item_attribute, page_url)
-    pool.join()
-    pool.close()
+    # pool.join()
+    # pool.close()
+    print 'get '+asid.strip()+'finish'
     asin_comment = []
     for i in results:
         if i == []:
@@ -271,18 +275,28 @@ def spider_page_logic(asid):
         else:
             asin_comment.extend(i)
 
+    print asin_comment[1]
     return asin_comment
     #每当抓取完一件商品（按照asin区分）后，就立刻写入缓存的txt中    
 
 def write_result_by_asid(asid,address,filename,asin_comment):
-    rst = open(address+'/'+str(filename)+'result_comment.txt','a')
-    count = 0 
-    for i in asin_comment:
-        for char in i:
-            rst.write(char)
-        count = count+1
-        rst.write('\n') 
-    rst.close()
+    headers = ['prod_asin','title','content','user_name','color','type_call','user_address','vote','prod_star','create_date','prod_website','prod_group_number','good_type']
+
+    fh = open(address+'/'+str(filename)+'result_comment.txt','a')
+    
+    count = 0
+
+    for line in asin_comment:
+        rows = {}
+
+        line.extend([config.pro_website,asid,config.good_type])
+        for name in headers:
+            rows[name] = line[headers.index(name)]
+            
+        json_content = json.dumps(rows)
+        fh.write(json_content)
+        fh.write('\n')
+
     print '抓取完'+str(asid.strip())+'抓取到'+str(count)+'条,开始抓取下一件商品'
     #每当抓取完一件商品，就把内容写入到txt文件中
 
@@ -300,13 +314,14 @@ def get_item_attribute(url):
         review_list = page_html.find_all(class_="a-section review")
         #从html代码中获得所有评论的html块，储存成一个列表
         for comment in review_list:
-            comment_data = [asid,'\t']
+            comment_data = [asid]
             comment_data.extend(get_comment_data(comment))
             
         #对列表中的每一块，依次获取到全部评论细节，组成列表储存起来
             asin_comment.append(comment_data)
         print '     '+asid+' '+str(page)
-        time.sleep(random.uniform(1,3))
+        #time.sleep(random.uniform(1,3))
+    #print asin_comment[3]
     return asin_comment
     
 
