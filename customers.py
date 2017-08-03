@@ -197,7 +197,6 @@ def getStatusCode(url):
     r = requests.get(url, allow_redirects = False)
     return str(r.status_code)
  
-
 fh = open('custmer.txt','r')
 custmer_list = fh.readlines()
 fh.close()    
