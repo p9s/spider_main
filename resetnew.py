@@ -29,15 +29,15 @@ def reset_list(line):
 
     
 
-def count_increase(write_in):
-    index_dict = {}
-    for i in write_in:
-        if i[0] in index_dict:
-            index_dict[i[0]] += 1
-        else:
-            index_dict[i[0]] = 1
+# def count_increase(write_in):
+#     index_dict = {}
+#     for i in write_in:
+#         if i[0] in index_dict:
+#             index_dict[i[0]] += 1
+#         else:
+#             index_dict[i[0]] = 1
 
-    return index_dict
+#     return index_dict
 
 
 def write_in_database(write_in):

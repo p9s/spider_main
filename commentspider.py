@@ -47,6 +47,7 @@ def run_spider(filename):
             spidermethod.refresh(asinlist,count_down,filename)
             continue
     #更新asid列表
+
     
     count = 0
     fh.close()
