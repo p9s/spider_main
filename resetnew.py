@@ -74,7 +74,7 @@ print 'reseting'
 write_in = pool.map(reset_list,nw)
 #write_in = reset_list(nw,rst)
 print 'reset finished'
-index_dict = count_increase(write_in)
+# index_dict = count_increase(write_in)
 print 'writing into database'
 # write_increase(index_dict)
 write_in_database(write_in)

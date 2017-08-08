@@ -291,7 +291,7 @@ def write_result_by_asid(asid,address,filename,asin_comment):
 
         line.extend([config.pro_website,asid,config.good_type])
         for name in headers:
-            rows[name] = line[headers.index(name)]
+            rows[name] = (line[headers.index(name)]).strip()
             
         json_content = json.dumps(rows)
         fh.write(json_content)
