@@ -76,10 +76,10 @@ def get_user_comments(prod):
         pro_type = 'N/A'
     #获取评论的标题
     try:
-        time = prod.find(class_="a-size-base a-color-base")
-        time = time.get_text()
+        comment_time = prod.find(class_="a-size-base a-color-base")
+        comment_time = comment_time.get_text()
     except:
-        time = 'N/A'
+        comment_time = 'N/A'
     #获取评论的时间
     try:
         stars = prod.find('i')
@@ -132,7 +132,7 @@ def get_user_comments(prod):
     except:
         good_type = 'N/A'
 
-    result = [time,stars,title,content,prod_pic,page_url,prod_asin,good_type]
+    result = [page_url,content,'N/A',prod_asin,stars,page_url,comment_time]
     #print result
     return result
     #返回一个元组

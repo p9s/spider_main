@@ -145,16 +145,32 @@ def get_word_count(analys):
     result_list = list(set(result_list))
     # conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='db_data2force', charset='utf8')
     # cursor = conn.cursor()
+    conn.execute('SELECT * FROM py_keyword_word_count WHERE good_type = "'+config.good_type+'"')
+    key_words_list = cursor.fetchall()
+    key_words_index = []
+    for key_word_line in key_words_list:
+        key_words_index.append(key_word_line[1])
 
 
     print 'writing into database...'
     count = 0
     for line in result_list:
         #print line
-        cursor.execute('INSERT INTO  py_keyword_word_count (express_without_score,word_type,count_all,count_pos,count_neg,count_mid,good_type)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
-        count = count+1
-        if count % 10000 == 0:
-            conn.commit()#五千条提交一次    
+        if line[0] not in key_words_index:
+            cursor.execute('INSERT INTO  py_keyword_word_count (express_without_score,word_type,count_all,count_pos,count_neg,count_mid,good_type)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
+            count = count+1
+            if count % 10000 == 0:
+                conn.commit()#五千条提交一次 
+        else:#如果不存在，则插入，如果存在，则更新
+            cursor.execute('UPDATE py_keyword_word_count SET count_all = "'+str(line[2])+'" WHERE express_without_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
+            cursor.execute('UPDATE py_keyword_word_count SET count_pos = "'+str(line[3])+'" WHERE express_without_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
+            cursor.execute('UPDATE py_keyword_word_count SET count_neg = "'+str(line[4])+'" WHERE express_without_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
+            cursor.execute('UPDATE py_keyword_word_count SET count_mid = "'+str(line[5])+'" WHERE express_without_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
+            cursor.execute('UPDATE py_keyword_word_count SET syn_status = 2 WHERE express_without_score = '+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
+            count = count+1
+            if count % 10000 == 0:
+                conn.commit()#五千条提交一次 
+
     conn.commit()
 
 def get_main_word():
@@ -165,6 +181,16 @@ def get_main_word():
 
     cursor.execute('SELECT * FROM py_keyword_word_count WHERE good_type = "'+config.good_type+'"')
     results = cursor.fetchall()
+
+    cursor.execute('SELECT * FROM py_keyword_main_tmp WHERE good_type = "'+config.good_type+'"')
+    key_main = cursor.fetchall()
+    key_main_index = []
+    for i in key_main:
+        tmp = []
+        for j in i[1:]:
+            tmp.append(j)
+        key_main_index.append(tmp)
+
     print result[2]
     print 'getting main table...'
     index_dict = {}
@@ -178,12 +204,17 @@ def get_main_word():
 
     count = 0
     for line in final_result:
+        #如果这条不存在，则插入，如果存在，则跳过
         #print len(line)
         #print line
-        cursor.execute('INSERT INTO  py_keyword_main_tmp (express,score,comment_id,comment,pos_or_neg,good_type,express_id)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
-        count = count+1
-        if count % 5000 == 0:
-            conn.commit()
+        if line not in key_main_index:
+            cursor.execute('INSERT INTO  py_keyword_main_tmp (express,score,comment_id,comment,pos_or_neg,good_type,express_id)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
+            count = count+1
+            if count % 10000 == 0:
+                conn.commit()
+        else:
+            continue
+
 
     conn.commit()
 

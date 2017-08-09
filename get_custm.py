@@ -5,8 +5,16 @@ conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', pa
 cursor = conn.cursor()
 print 'connecting successful...'
 
-cursor.execute('SELECT * FROM py_product_comments')#从数据库中提取全部数据
+cursor.execute('SELECT * FROM py_product_comments WHERE prod_website = "AZCM"')#从数据库中提取全部数据
 cstms = cursor.fetchall()
+time_list = []
+for item in cstms:
+    if int(item[10].split('/')[0])>=2017 and int(item[10].split('/')[1])>=7:
+        time_list.append(item)
+
+print len(time_list)
+# for i in time_list:
+
 print 'writing'
 
 fh = open('custmer.txt','w')
@@ -20,4 +28,6 @@ for i in tmp:
     fh.write(i+'\n')
 
 fh.close()
+print len(tmp)
+
 #把用户的地址后缀保存成txt文件，每一行是一个地址后缀

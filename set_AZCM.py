@@ -34,21 +34,37 @@ for key in key_list:
    
     for i in pro_info:
         if int(i[0]) == int(pro_index):
-            key.append(i[6])
+            key.append(i[1])
             
             break
     result.append(key)
 
 print 'writing into database...'
 
+conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
+cursor = conn.cursor()
+print 'connecting successful...'
+cursor.execute('SELECT * FROM py_keyword_main WHERE good_type = "'+config.good_type+'"')#从数据库中提取全部数据
+key_words = cursor.fetchall()
+key_index = []
+for i in key_words:
+    tmp = []
+    for j in i[1:-1]:
+        tmp.append(j)
+    key_index.append(tmp)
+
+
+
+
 print result[4]
 count = 0
 for line in result:
+    if line not in key_index:
     #print line
-    cursor.execute('INSERT INTO  py_keyword_main(express,score,comment_id,comment,pos_or_neg,good_type,express_id,prod_asin)  values(%s,%s,%s,%s,%s,%s,%s,%s)',line) 
-    count += 1
-    if count % 1000 == 0:
-        conn.commit()
+        cursor.execute('INSERT INTO  py_keyword_main(express,score,comment_id,comment,pos_or_neg,good_type,express_id,prod_asin)  values(%s,%s,%s,%s,%s,%s,%s,%s)',line) 
+        count += 1
+        if count % 10000 == 0:
+            conn.commit()
     else:
         continue
 

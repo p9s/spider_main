@@ -131,20 +131,35 @@ result_list = pool.map(get_result_tuple,key_word_index)
 # for key in key_word_index:
 #     get_result_tuple(key)
 
-# conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
-# cursor = conn.cursor()
+conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
+cursor = conn.cursor()
+cursor.execute('SELECT * FROM py_keyword_count WHERE good_type = "'+config.good_type+'"')
+key_count = cursor.fetchall()
+key_index = []
+for i in key_count:
+    key_index.append(i[1])
+
 
 print 'writing into database...'
 
 count = 0
 for line in result_list:
-    try:
-        cursor.execute('INSERT INTO  py_keyword_count (express_with_score,count_all,count_pos,count_neg,count_mid,good_type,express_id)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
-        count = count+1
+    if line[0] not in key_index:
+        try:
+            cursor.execute('INSERT INTO  py_keyword_count (express_with_score,count_all,count_pos,count_neg,count_mid,good_type,express_id)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
+            count = count+1
+            if count % 5000 == 0:
+                conn.commit()
+        except:
+            continue
+    else:
+        cursor.execute('UPDATE py_keyword_count SET count_all = "'+str(line[1])+'" WHERE express_with_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
+        cursor.execute('UPDATE py_keyword_count SET count_pos = "'+str(line[2])+'" WHERE express_with_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
+        cursor.execute('UPDATE py_keyword_count SET count_neg = "'+str(line[3])+'" WHERE express_with_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
+        cursor.execute('UPDATE py_keyword_count SET count_mid = "'+str(line[4])+'" WHERE express_with_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
         if count % 5000 == 0:
             conn.commit()
-    except:
-        continue
+
 conn.commit()
 
 

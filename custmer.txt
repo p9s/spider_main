@@ -512,7 +512,7 @@
 /gp/pdp/profile/A30SXV1WFNLVPW/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A2J4ZPJW4U8HSP/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/AYH86QLS5BBGH/ref=cm_cr_arp_d_pdp?ie=UTF8
-/gp/pdp/profile/A2O08JPWWOMEMW/ref=cm_cr_arp_d_pdp?ie=UTF8
+/gp/pdp/profile/AIIR5RHKNLPPP/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A2671DT10ZL6OT/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A12JQZPWH6VS73/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A1LA3RQ2JTI8BY/ref=cm_cr_arp_d_pdp?ie=UTF8
@@ -1343,7 +1343,7 @@
 /gp/pdp/profile/A2ZCBOHVXOGRI3/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/AKWCWJH9UPMKI/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A1Q0N8SHS0NR2Y/ref=cm_cr_arp_d_pdp?ie=UTF8
-/gp/pdp/profile/A2EIYD0E5RA5HO/ref=cm_cr_arp_d_pdp?ie=UTF8
+/gp/pdp/profile/A2O08JPWWOMEMW/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/AN7FL8OIZUGA1/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A17QQPIO3SLVRD/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A1G2D8I49E4BBN/ref=cm_cr_arp_d_pdp?ie=UTF8
@@ -3063,7 +3063,6 @@
 /gp/pdp/profile/A38K51EJXQW63S/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A1W2018610S6HS/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/AOBJJT7P5L5V2/ref=cm_cr_arp_d_pdp?ie=UTF8
-/gp/pdp/profile/AIIR5RHKNLPPP/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A8LZZ90Q6PJ6P/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A8MUGY6EOSKHC/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/AJT16UDVQ7WT/ref=cm_cr_arp_d_pdp?ie=UTF8
@@ -7221,6 +7220,7 @@
 /gp/pdp/profile/A1Q3HSDZRP0RWG/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A23OETGHIQTT41/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A29FKQ96V8NRHK/ref=cm_cr_arp_d_pdp?ie=UTF8
+/gp/pdp/profile/A1ZJ64DVHS9OZZ/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A262KV7Z2KYRZ0/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A1TPLZ41W2O8V5/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A2FBDMOQPVDKMG/ref=cm_cr_arp_d_pdp?ie=UTF8
@@ -8071,7 +8071,7 @@
 /gp/pdp/profile/A2OZYFMV4OSGHI/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A1NMJ1JOXNPI1D/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A2LIJPQ685970J/ref=cm_cr_arp_d_pdp?ie=UTF8
-/gp/pdp/profile/A1ZJ64DVHS9OZZ/ref=cm_cr_arp_d_pdp?ie=UTF8
+/gp/pdp/profile/A2EIYD0E5RA5HO/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A2D864O6NQ4NOB/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/AF858SRF4VCRI/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A1N1X5558REX5K/ref=cm_cr_arp_d_pdp?ie=UTF8
@@ -13829,7 +13829,6 @@
 /gp/pdp/profile/A1284CUHN5NC62/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/AGUMWOAOSU0LP/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A1LZUJX8XP3ZAH/ref=cm_cr_arp_d_pdp?ie=UTF8
-0
 /gp/pdp/profile/A1NM5DAZLR0CS4/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A2LRS2F623BTGV/ref=cm_cr_arp_d_pdp?ie=UTF8
 /gp/pdp/profile/A13E1WPD0QBDFU/ref=cm_cr_arp_d_pdp?ie=UTF8
