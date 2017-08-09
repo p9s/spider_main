@@ -145,7 +145,7 @@ def get_word_count(analys):
     result_list = list(set(result_list))
     # conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='db_data2force', charset='utf8')
     # cursor = conn.cursor()
-    conn.execute('SELECT * FROM py_keyword_word_count WHERE good_type = "'+config.good_type+'"')
+    cursor.execute('SELECT * FROM py_keyword_word_count WHERE good_type = "'+config.good_type+'"')
     key_words_list = cursor.fetchall()
     key_words_index = []
     for key_word_line in key_words_list:

@@ -12,6 +12,7 @@ import random
 import time
 import spidermethod
 import requests
+import json
 
 
 debug = 0
@@ -64,10 +65,12 @@ def get_page_html(url):
     return page_html
 
 def get_user_comments(prod):
+    pro_name = prod.find(class_="a-size-medium a-color-base glimpse-product-title glimpse-flex-item").get_text().strip()
+
     prod_pic = prod.find(class_="a-column a-span12 a-spacing-small a-ws-span4")
     prod_pic = prod_pic.find('img')
     prod_pic = prod_pic['src']
-    print prod_pic
+    # print prod_pic
 
     try:
         pro_type = prod.find(class_="a-size-medium a-color-base glimpse-product-title glimpse-flex-item")
@@ -106,7 +109,7 @@ def get_user_comments(prod):
     page_url = pro_page
     #print page_url
     #获取评论本身链接
-    print page_url
+    # print page_url
     good_page_soup = spidermethod.get_htmlsoup(page_url)
     #good_page_soup = get_ajax(page_url)
     #soup处理目标网址的html
@@ -114,6 +117,11 @@ def get_user_comments(prod):
     good_class = good_class.find('a')
     good_url = good_class['href']
     prod_asin = (good_url.split('/'))[5]
+    try:
+        pro_attribute = good_page_soup.find(class_="crDescription")
+        pro_price = pro_attribute.find(class_="price").get_text().strip()
+    except:
+        pro_price = 'N/A'
     #获取产品的asin
     # if debug:
     #     print good_url
@@ -128,11 +136,11 @@ def get_user_comments(prod):
             tmp.append(rst)
 
         good_type = ''.join(tmp)
-        good_type = good_type.replace(u'\u203a',',')
+        good_type = good_type.replace(u'\u203a',',').strip()
     except:
         good_type = 'N/A'
 
-    result = [page_url,content,'N/A',prod_asin,stars,page_url,comment_time]
+    result = [page_url,content,'N/A',prod_asin,pro_name,pro_price,stars,page_url,comment_time]
     #print result
     return result
     #返回一个元组
@@ -172,18 +180,21 @@ def get_result_list(name):
     # pool.close()
     
     fh = open('customer_bought.txt','a')
+    count= 0
+    headers = ['customer_code','username','comments_code','comments_content','order_code','pro_asin','pro_name','pro_price','pro_stars','comment_link','comment_time']
     for line in result_list:
-        write_in = [username,user_icon,name.strip()]+ line
-        if debug:
-            print write_in
-        else:
-            for i in write_in:
-                fh.write(i)
-                fh.write('\t')
-            fh.write('\n')
+        write_in = [name.strip(),username]+ line
+        rows = {}
+        for name in headers:
+            rows[name] = (write_in[headers.index(name)]).strip()
+            
+        json_content = json.dumps(rows)
+        fh.write(json_content)
+        count+=1
+        fh.write('\n')
             #print write_in
     fh.close()
-    print '\n'
+    print count
 
 def refresh():
     fh = open('custmer.txt','r')
