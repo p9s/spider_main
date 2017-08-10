@@ -26,7 +26,7 @@ def get_key_word(comment_line):
     nltk_keyword = nltk_keyword.lower()#统一处理成小写
     nltk_keyword = nltk_keyword.split(',')#以逗号分割成列表
     
-    judge = comment_line[9]
+    judge = comment_line[8]
     if int(judge) > 3:
         judge = '1'
     elif int(judge) < 3:
@@ -40,7 +40,7 @@ def get_key_word(comment_line):
 
     rst_tmp = []
     for j in tmp:
-        if float(j[1]) > 1.0 and j[0] not in nltk_keyword:
+        if j[0] not in nltk_keyword:
             #排除掉rake中分数过低的关键词
             rst_tmp.append([j[0],j[1],comment_line[0],comment_line[3],judge,config.good_type])
             #格式化输出结果
@@ -159,15 +159,18 @@ def get_word_count(analys):
         if line[0] not in key_words_index:
             cursor.execute('INSERT INTO  py_keyword_word_count (express_without_score,word_type,count_all,count_pos,count_neg,count_mid,good_type)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
             count = count+1
+            print count
             if count % 10000 == 0:
+
                 conn.commit()#五千条提交一次 
         else:#如果不存在，则插入，如果存在，则更新
-            cursor.execute('UPDATE py_keyword_word_count SET count_all = "'+str(line[2])+'" WHERE express_without_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
-            cursor.execute('UPDATE py_keyword_word_count SET count_pos = "'+str(line[3])+'" WHERE express_without_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
-            cursor.execute('UPDATE py_keyword_word_count SET count_neg = "'+str(line[4])+'" WHERE express_without_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
-            cursor.execute('UPDATE py_keyword_word_count SET count_mid = "'+str(line[5])+'" WHERE express_without_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
-            cursor.execute('UPDATE py_keyword_word_count SET syn_status = 2 WHERE express_without_score = '+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
+            cursor.execute('UPDATE py_keyword_word_count SET count_all = "'+str(line[2]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+            cursor.execute('UPDATE py_keyword_word_count SET count_pos = "'+str(line[3]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+            cursor.execute('UPDATE py_keyword_word_count SET count_neg = "'+str(line[4]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+            cursor.execute('UPDATE py_keyword_word_count SET count_mid = "'+str(line[5]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+            cursor.execute('UPDATE py_keyword_word_count SET syn_status = 2 WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
             count = count+1
+            print count
             if count % 10000 == 0:
                 conn.commit()#五千条提交一次 
 

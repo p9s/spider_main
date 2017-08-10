@@ -153,10 +153,10 @@ for line in result_list:
         except:
             continue
     else:
-        cursor.execute('UPDATE py_keyword_count SET count_all = "'+str(line[1])+'" WHERE express_with_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
-        cursor.execute('UPDATE py_keyword_count SET count_pos = "'+str(line[2])+'" WHERE express_with_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
-        cursor.execute('UPDATE py_keyword_count SET count_neg = "'+str(line[3])+'" WHERE express_with_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
-        cursor.execute('UPDATE py_keyword_count SET count_mid = "'+str(line[4])+'" WHERE express_with_score = "'+str(line[0])+'"and WHERE good_type = "'+config.good_type+'"')
+        cursor.execute('UPDATE py_keyword_count SET count_all = "'+str(line[1])+'" WHERE express_with_score = "'+str(line[0])+'" and good_type = "'+config.good_type+'"')
+        cursor.execute('UPDATE py_keyword_count SET count_pos = "'+str(line[2])+'" WHERE express_with_score = "'+str(line[0])+'" and good_type = "'+config.good_type+'"')
+        cursor.execute('UPDATE py_keyword_count SET count_neg = "'+str(line[3])+'" WHERE express_with_score = "'+str(line[0])+'" and good_type = "'+config.good_type+'"')
+        cursor.execute('UPDATE py_keyword_count SET count_mid = "'+str(line[4])+'" WHERE express_with_score = "'+str(line[0])+'" and good_type = "'+config.good_type+'"')
         if count % 5000 == 0:
             conn.commit()
 

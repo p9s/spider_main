@@ -46,7 +46,7 @@ def write_in_database(write_in):
     for line in write_in:
         try:
             try:
-                cursor.execute('UPDATE py_product_comments SET vote = "'+str(line[-1])+'" WHERE prod_asin = "'+str(line[0])+'" AND WHERE content = "'+line[2]+'" AND WHERE user_name = "'+str(line[3])+'" AND WHERE user_address = "'+str(line[6])+'"') 
+                cursor.execute('UPDATE py_product_comments SET vote = "'+str(line[-1])+'" WHERE prod_asin = "'+str(line[0])+'" AND content = "'+line[2]+'" AND user_name = "'+str(line[3])+'" AND user_address = "'+str(line[6])+'"') 
                 count += 1
                 if count%10000 == 0:
                     conn.commit()
