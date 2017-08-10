@@ -6,7 +6,7 @@ import json
 
 
 def combination(keywords):
-    headers = ['prod_asin','title','content','user_name','color','type_call','user_address','vote','prod_star','create_date','prod_website','prod_group_number','good_type']
+    headers = ['prod_asin','title','content','user_name','color','type_call','user_address','prod_star','create_date','prod_website','prod_group_number','vote','good_type']
     rst = []
     for i in keywords:
         fh = open('result/'+i+'result_comment.txt')
@@ -53,7 +53,7 @@ def write_into_database(comment_list,cursor,conn):
     count = 0 
     for line in comment_list:
         try:
-            cursor.execute('INSERT INTO py_product_comments_tmp(prod_asin,title,content,user_name,color,type_call,user_address,vote,prod_star,create_date,prod_website,prod_group_number,good_type)  values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',line) 
+            cursor.execute('INSERT INTO py_product_comments_tmp(prod_asin,title,content,user_name,color,type_call,user_address,prod_star,create_date,prod_website,prod_group_number,vote,good_type)  values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',line) 
         #cursor.execute('INSERT INTO fashion_shoe_comment_tmp (prod_asin,title,content,user_name,color,type_call,user_address,vote,prod_star,create_date)  values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',line)
         #写入数据库
             count = count + 1           
