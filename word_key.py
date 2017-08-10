@@ -156,23 +156,27 @@ def get_word_count(analys):
     count = 0
     for line in result_list:
         #print line
-        if line[0] not in key_words_index:
-            cursor.execute('INSERT INTO  py_keyword_word_count (express_without_score,word_type,count_all,count_pos,count_neg,count_mid,good_type)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
-            count = count+1
+        # if line[0] not in key_words_index:
+        cursor.execute('INSERT INTO  py_keyword_word_count (express_without_score,word_type,count_all,count_pos,count_neg,count_mid,good_type)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
+        count = count+1
+        
+        if count%100 == 0:
             print count
-            if count % 10000 == 0:
+        if count % 10000 == 0:
 
-                conn.commit()#五千条提交一次 
-        else:#如果不存在，则插入，如果存在，则更新
-            cursor.execute('UPDATE py_keyword_word_count SET count_all = "'+str(line[2]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
-            cursor.execute('UPDATE py_keyword_word_count SET count_pos = "'+str(line[3]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
-            cursor.execute('UPDATE py_keyword_word_count SET count_neg = "'+str(line[4]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
-            cursor.execute('UPDATE py_keyword_word_count SET count_mid = "'+str(line[5]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
-            cursor.execute('UPDATE py_keyword_word_count SET syn_status = 2 WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
-            count = count+1
-            print count
-            if count % 10000 == 0:
-                conn.commit()#五千条提交一次 
+            conn.commit()#五千条提交一次 
+        # else:#如果不存在，则插入，如果存在，则更新
+        #     cursor.execute('UPDATE py_keyword_word_count SET count_all = "'+str(line[2]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+        #     cursor.execute('UPDATE py_keyword_word_count SET count_pos = "'+str(line[3]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+        #     cursor.execute('UPDATE py_keyword_word_count SET count_neg = "'+str(line[4]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+        #     cursor.execute('UPDATE py_keyword_word_count SET count_mid = "'+str(line[5]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+        #     cursor.execute('UPDATE py_keyword_word_count SET syn_status = 2 WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+        #     count = count+1
+            
+        #     if count%50 == 0:
+        #         print count
+        #     if count % 10000 == 0:
+        #         conn.commit()#五千条提交一次 
 
     conn.commit()
 
@@ -210,13 +214,13 @@ def get_main_word():
         #如果这条不存在，则插入，如果存在，则跳过
         #print len(line)
         #print line
-        if line not in key_main_index:
-            cursor.execute('INSERT INTO  py_keyword_main_tmp (express,score,comment_id,comment,pos_or_neg,good_type,express_id)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
-            count = count+1
-            if count % 10000 == 0:
-                conn.commit()
-        else:
-            continue
+        # if line not in key_main_index:
+        cursor.execute('INSERT INTO  py_keyword_main_tmp (express,score,comment_id,comment,pos_or_neg,good_type,express_id)  values(%s,%s,%s,%s,%s,%s,%s)',line) 
+        count = count+1
+        if count % 10000 == 0:
+            conn.commit()
+        # else:
+        #     continue
 
 
     conn.commit()
