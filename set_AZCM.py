@@ -1,6 +1,7 @@
 #coding=utf-8
 import MySQLdb as mydatabase
 import config
+from multiprocessing import Pool
 
 conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
 cursor = conn.cursor()
@@ -29,15 +30,19 @@ for i in key_words:
     key_list.append(tmp[1:])
 
 result = []
-for key in key_list:
+
+def func_judge(key):
     pro_index = key[2]
-   
     for i in pro_info:
         if int(i[0]) == int(pro_index):
-            key.append(i[1])
-            
+            key.append(i[1])            
             break
-    result.append(key)
+    return key
+
+
+pool = Pool()
+result = pool.map(func_judge,key_list)
+
 
 print 'writing into database...'
 
