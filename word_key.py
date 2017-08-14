@@ -165,18 +165,18 @@ def get_word_count(analys):
         if count % 10000 == 0:
 
             conn.commit()#五千条提交一次 
-        # else:#如果不存在，则插入，如果存在，则更新
-        #     cursor.execute('UPDATE py_keyword_word_count SET count_all = "'+str(line[2]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
-        #     cursor.execute('UPDATE py_keyword_word_count SET count_pos = "'+str(line[3]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
-        #     cursor.execute('UPDATE py_keyword_word_count SET count_neg = "'+str(line[4]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
-        #     cursor.execute('UPDATE py_keyword_word_count SET count_mid = "'+str(line[5]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
-        #     cursor.execute('UPDATE py_keyword_word_count SET syn_status = 2 WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
-        #     count = count+1
+        else:#如果不存在，则插入，如果存在，则更新
+            cursor.execute('UPDATE py_keyword_word_count SET count_all = "'+str(line[2]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+            cursor.execute('UPDATE py_keyword_word_count SET count_pos = "'+str(line[3]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+            cursor.execute('UPDATE py_keyword_word_count SET count_neg = "'+str(line[4]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+            cursor.execute('UPDATE py_keyword_word_count SET count_mid = "'+str(line[5]).encode('utf-8')+'" WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+            cursor.execute('UPDATE py_keyword_word_count SET syn_status = 2 WHERE express_without_score = "'+line[0]+'" AND good_type LIKE "%'+str(config.good_type)+'%"')
+            count = count+1
             
-        #     if count%50 == 0:
-        #         print count
-        #     if count % 10000 == 0:
-        #         conn.commit()#五千条提交一次 
+            if count%50 == 0:
+                print count
+            if count % 10000 == 0:
+                conn.commit()#五千条提交一次 
 
     conn.commit()
 
