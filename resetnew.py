@@ -22,9 +22,7 @@ for i in new:
 nw = list(set(nw))
 
 def reset_list(line):
-    if line[:-1] in rst:
-        return 0
-    else:
+    if line[:-1] not in rst:
         return line
 
     
@@ -44,25 +42,28 @@ def write_in_database(write_in):
     count = 0
     print 'committing'
     for line in write_in:
-        try:
-            try:
+        if line != None :
+            cursor.execute('SELECT * FROM py_product_comments WHERE prod_asin = "'+str(line[0])+'" AND content = "'+line[2]+'" AND user_name = "'+line[3]+'" AND user_address = "'+str(line[6])+'"')
+            if len(cursor.fetchall()) != 0:
+
                 cursor.execute('UPDATE py_product_comments SET vote = "'+str(line[-1])+'" WHERE prod_asin = "'+str(line[0])+'" AND content = "'+line[2]+'" AND user_name = "'+line[3]+'" AND user_address = "'+str(line[6])+'"') 
                 cursor.execute('UPDATE py_product_comments SET syn_status = 2 WHERE prod_asin = "'+str(line[0])+'" AND content = "'+line[2]+'" AND user_name = "'+line[3]+'" AND user_address = "'+str(line[6])+'"') 
-                
                 count += 1
-                if count%10000 == 0:
+                if count%1000 == 0:
                     conn.commit()
-            except Exception,e:
-                print e
+            else:
                 cursor.execute('INSERT INTO py_product_comments(prod_asin,title,content,user_name,color,type_call,user_address,prod_star,create_date,prod_website,prod_group_number,good_type,vote)  values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',line) 
                 count+= 1
-                if count%10000 == 0:
+                if count%1000 == 0:
                     conn.commit()
-        except Exception,e:
-            print line
-            continue
+                    print 'update'
+                        
+                # except Exception,e:
+                #     print e 
+                #     print line
+                #     continue
+        
 
-    conn.commit()
 
 # def write_increase(index_dict):
 #     for key in index_dict:
@@ -83,7 +84,12 @@ print 'reseting'
 write_in = pool.map(reset_list,nw)
 #write_in = reset_list(nw,rst)
 print 'reset finished'
+write_in = list(set(write_in))
+print len(write_in)
+print write_in[10]
 # index_dict = count_increase(write_in)
 print 'writing into database'
 # write_increase(index_dict)
 write_in_database(write_in)
+conn.commit()
+print 'committing'
