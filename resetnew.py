@@ -86,7 +86,6 @@ write_in = pool.map(reset_list,nw)
 print 'reset finished'
 write_in = list(set(write_in))
 print len(write_in)
-
 # index_dict = count_increase(write_in)
 print 'writing into database'
 # write_increase(index_dict)

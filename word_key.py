@@ -197,8 +197,6 @@ def get_main_word():
         for j in i[1:]:
             tmp.append(j)
         key_main_index.append(tmp)
-
-    print result[2]
     print 'getting main table...'
     index_dict = {}
     for i in results:
