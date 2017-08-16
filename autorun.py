@@ -18,6 +18,6 @@ while True:
 
 
 os.system('python intodb.py')
-os.system('python main_run.py')
+os.system('python resetnew.py')
 
 
