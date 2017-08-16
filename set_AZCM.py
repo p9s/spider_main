@@ -3,7 +3,7 @@ import MySQLdb as mydatabase
 import config
 from multiprocessing import Pool
 
-conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
+conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='db_dolphin', charset='utf8')
 cursor = conn.cursor()
 print 'connecting successful...'
 
@@ -46,7 +46,7 @@ result = pool.map(func_judge,key_list)
 
 print 'writing into database...'
 
-conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
+conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='db_dolphin', charset='utf8')
 cursor = conn.cursor()
 print 'connecting successful...'
 cursor.execute('SELECT * FROM py_keyword_main WHERE good_type = "'+config.good_type+'"')#从数据库中提取全部数据

@@ -4,7 +4,7 @@ import random
 import time
 import cal_sell
 
-conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
+conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='db_dolphin', charset='utf8')
 cursor = conn.cursor()
 
 cursor.execute('SELECT * FROM py_product_comments')
@@ -43,18 +43,18 @@ def write_in_database(write_in):
     print 'committing'
     for line in write_in:
         if line != None :
-            cursor.execute('SELECT * FROM py_product_comments WHERE prod_asin = "'+str(line[0])+'" AND content = "'+line[2]+'" AND user_name = "'+line[3]+'" AND user_address = "'+str(line[6])+'"')
+            cursor.execute('SELECT * FROM py_product_comments WHERE prod_asin = "%s" AND content = "%s" AND user_name = "%s" AND user_address = "%s"',[line[0],line[2],line[3],line[6]])
             if len(cursor.fetchall()) != 0:
 
                 cursor.execute('UPDATE py_product_comments SET vote = "'+str(line[-1])+'" WHERE prod_asin = "'+str(line[0])+'" AND content = "'+line[2]+'" AND user_name = "'+line[3]+'" AND user_address = "'+str(line[6])+'"') 
                 cursor.execute('UPDATE py_product_comments SET syn_status = 2 WHERE prod_asin = "'+str(line[0])+'" AND content = "'+line[2]+'" AND user_name = "'+line[3]+'" AND user_address = "'+str(line[6])+'"') 
                 count += 1
-                if count%1000 == 0:
+                if count%10000 == 0:
                     conn.commit()
             else:
                 cursor.execute('INSERT INTO py_product_comments(prod_asin,title,content,user_name,color,type_call,user_address,prod_star,create_date,prod_website,prod_group_number,good_type,vote)  values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)',line) 
                 count+= 1
-                if count%1000 == 0:
+                if count%10000 == 0:
                     conn.commit()
                     print 'update'
                         

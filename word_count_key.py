@@ -3,7 +3,7 @@ import MySQLdb as mydatabase
 from multiprocessing import Pool
 import config
 
-conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
+conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='db_dolphin', charset='utf8')
 cursor = conn.cursor()
 
 
@@ -131,7 +131,7 @@ result_list = pool.map(get_result_tuple,key_word_index)
 # for key in key_word_index:
 #     get_result_tuple(key)
 
-conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='dolphin_staff', charset='utf8')
+conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='db_dolphin', charset='utf8')
 cursor = conn.cursor()
 cursor.execute('SELECT * FROM py_keyword_count WHERE good_type = "'+config.good_type+'"')
 key_count = cursor.fetchall()
