@@ -12,6 +12,8 @@ def combination(keywords):
         fh = open('result/'+i+'result_comment.txt')
         comment_list = fh.readlines()
         rst.extend(comment_list)
+
+    rst = list(set(rst))
     
     result = []
     for item in rst:
@@ -35,7 +37,6 @@ def set_color(line):
         #print result_data
         tmp = result_data[4]
 
-        
         tmp = tmp.split('|')
         for i in tmp:
             if 'Color' in i:
@@ -44,7 +45,7 @@ def set_color(line):
         result_data[4] = color[1]
         #result.append(result_data)
     except:
-        result_data = []
+        result_data = line
     
     return result_data
     #重设颜色格式，只留下颜色信息

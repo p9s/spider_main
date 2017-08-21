@@ -33,9 +33,6 @@ Pool = Pool(2)
 comment_list = Pool.map(dbmethod.set_color,comment_list)
 print comment_list[2]
 
-comment_list = spidermethod.reset_list(comment_list)
-#对内容进行去重
-
 conn = mydatabase.connect(host='117.25.155.149', port=3306, user='gelinroot', passwd='glt#789A', db='db_dolphin', charset='utf8')
 cursor = conn.cursor()
 
