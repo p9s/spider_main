@@ -4,8 +4,11 @@ import os
 import time
 import config
 
-fh = open('reault/result_comment.txt','r')
-fh.close()
+try:
+    fh = open('reault/result_comment.txt','r')
+    fh.close()
+except Exception,e:
+    print e
 
 count = 0
 while True:
