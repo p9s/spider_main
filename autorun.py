@@ -4,6 +4,9 @@ import os
 import time
 import config
 
+fh = open('reault/result_comment.txt','r')
+fh.close()
+
 count = 0
 while True:
     fh = open('asid_list.txt')
@@ -16,8 +19,7 @@ while True:
     else:
         os.system('python commentspider.py')
 
-
 os.system('python intodb.py')
-os.system('python resetnew.py')
+
 
 
