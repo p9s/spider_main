@@ -7,5 +7,5 @@ while 1:
         os.system('python autorun.py')
         time.sleep(3600)
     time.sleep(60)
-
+#自动运行脚本
     
