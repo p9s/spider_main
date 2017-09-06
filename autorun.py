@@ -5,7 +5,7 @@ import time
 import config
 
 try:
-    fh = open('reault/result_comment.txt','r')
+    fh = open('result/result_comment.txt','r')
     fh.close()
 except Exception,e:
     print e
