@@ -62,6 +62,7 @@ def main():
     filename = config.keyword 
     for i in filename:
         run_spider(i)
+    #单线程处理
     #创建多线程一起开始抓，每个线程就是每个文件目录，但是具体到每个目录下的项目依旧是单线程
     # results = pool.map(run_spider, filename)
     # pool.close() 
