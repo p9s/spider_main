@@ -217,7 +217,7 @@ def reset_list(comment_list):
 #去除重复项
 def get_page_range(asid):
     print 'try to get page range...'
-    url = 'https://www.amazon.de/product-reviews/'+(str(asid).strip())+'/ref=cm_cr_arp_d_paging_btm_1?&sortBy=recent&pageNumber=1'
+    url = 'https://www.amazon.co.jp/product-reviews/'+(str(asid).strip())+'/ref=cm_cr_arp_d_paging_btm_1?&sortBy=recent&pageNumber=1'
     page_content = get_htmlsoup(url)
     if page_content == 0:
         page_range = 0
@@ -262,7 +262,7 @@ def spider_page_logic(asid):
     page_range = cycle_get_page_range(asid)
     page_url = []
     for page in range(1,page_range+1):
-        url = 'https://www.amazon.de/product-reviews/'+str(asid.strip())+'/ref=cm_cr_arp_d_paging_btm_'+str(page)+'?&sortBy=recent&pageNumber='+str(page)
+        url = 'https://www.amazon.co.jp/product-reviews/'+str(asid.strip())+'/ref=cm_cr_arp_d_paging_btm_'+str(page)+'?&sortBy=recent&pageNumber='+str(page)
         page_url.append(url)
     
     pool = ThreadPool(10)
