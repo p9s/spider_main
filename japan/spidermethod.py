@@ -218,6 +218,7 @@ def reset_list(comment_list):
 def get_page_range(asid):
     print 'try to get page range...'
     url = 'https://www.amazon.co.jp/product-reviews/'+(str(asid).strip())+'/ref=cm_cr_arp_d_paging_btm_1?&sortBy=recent&pageNumber=1'
+    #日本的网址
     page_content = get_htmlsoup(url)
     if page_content == 0:
         page_range = 0
