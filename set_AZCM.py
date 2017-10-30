@@ -35,7 +35,8 @@ def func_judge(key):
     pro_index = key[2]
     for i in pro_info:
         if int(i[0]) == int(pro_index):
-            key.append(i[1])            
+            key.append(i[1])
+            key.append(i[6])            
             break
     return key
 
@@ -66,7 +67,7 @@ count = 0
 for line in result:
     if line not in key_index:
     #print line
-        cursor.execute('INSERT INTO  py_keyword_main(express,score,comment_id,comment,pos_or_neg,good_type,express_id,prod_asin)  values(%s,%s,%s,%s,%s,%s,%s,%s)',line) 
+        cursor.execute('INSERT INTO  py_keyword_main(express,score,comment_id,comment,pos_or_neg,good_type,express_id,prod_asin,son_asin)  values(%s,%s,%s,%s,%s,%s,%s,%s,%s)',line) 
         count += 1
         if count % 10000 == 0:
             conn.commit()
