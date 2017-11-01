@@ -2,7 +2,7 @@
 import MySQLdb as mydatabase
 import config
 import json
-
+import exchangetype
 
 
 def combination(keywords):
@@ -28,27 +28,24 @@ def combination(keywords):
 
     return result
 
+
+
     #把几个评论列表连接起来，变成一个巨大的列表
 
 def set_color(line):
     result_data = line
-    try:
-        
+    try:  
         #print result_data
         tmp = result_data[4]
-
-        tmp = tmp.split('|')
-        for i in tmp:
-            if 'Color' in i:
-                color = i.split(':')
-        #对类型切片后进行关键词匹配
-        result_data[4] = color[1]
+        #color_json = crm_method.
+        
+        result_data[4] = exchangetype.stringtojson(tmp)
         #result.append(result_data)
     except:
         result_data = line
     
     return result_data
-    #重设颜色格式，只留下颜色信息
+    # 重设商品信息格式，储存成json
 
 def write_into_database(comment_list,cursor,conn):
     count = 0 

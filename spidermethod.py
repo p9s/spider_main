@@ -73,7 +73,7 @@ def timeexchange(time):
         if len(time[2]) == 1:
             time[2] = '0' + time[2]
         time[1] = monthexchange(str(time[1])) #把月份变成数字
-        time = '/'.join(time)#组成格式
+        time = '-'.join(time)#组成格式
     except:
         time = 'N/A'
     return time
